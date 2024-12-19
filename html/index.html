@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Assignment</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <!-- Toastify CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+</head>
+
+<body class="bg-white">
+    <div id="product-container"
+        class="parent max-w-full w-full mx-auto lg:max-h-[720px] lg:h-[720px] lg:max-w-[1330px] mt-0 pb-4 lg:my-20 flex flex-col 2md:flex-row justify-center items-center gap-[30px] md:gap-[60px] flex-wrap overflow-hidden">
+        <!-- Image Gallery -->
+        <div class="image-gallery w-full h-full flex-1">
+            <img id="main-image" src="" alt="product-image" class="w-full h-full active-image">
+        </div>
+
+        <!-- Product Details -->
+        <div class="product-details w-full 2md:flex-1 flex flex-col justify-center items-start 2md:px-4">
+            <h2 id="product-title" class="title font-bold text-[28px] sm:text-[32px] lg:text-[40px] leading-[44px] text-dark-slate-blue py-2 md:py-3"></h2>
+
+            <!-- Review Stars -->
+            <div id="reviews" class="packs-star flex flex-row justify-start gap-1 items-center pb-1">
+            </div>
+
+            <!-- Price -->
+            <div class="pt-4 md:pt-5">
+                <span id="old-price" class="font-normal text-xl leading-[30px] text-blue-gray line-through"></span>
+                <span id="main-price" class="ml-1 font-normal text-2xl leading-[30px] text-blue-shade"></span>
+            </div>
+
+            <!-- Type and Model -->
+            <div class="flex flex-row gap-10 pt-4 md:pt-5">
+                <div>
+                    <h5 class="type-text">Type</h5>
+                    <h3 id="product-type" class="font-bold text-base text-dark-slate-blue"></h3>
+                </div>
+                <div>
+                    <h5 class="type-text">Model Number</h5>
+                    <h3 id="model-number" class="font-bold text-base text-dark-slate-blue"></h3>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div id="description" class="font-normal text-[18px] leading-[30px] text-blue-gray pt-4 md:pt-5"></div>
+
+            <!-- Band Color -->
+            <div class="pt-4 md:pt-5">
+                <div class="font-bold text-lg leading-5 text-dark-slate-blue">Band Color</div>
+                <div id="color-picker" class="flex gap-6 mt-4 mb-2 ml-1 2md:ml-0">
+                </div>
+            </div>
+
+            
+
+            <!-- Size Options -->
+            <div class="pt-4 md:pt-5">
+                <div class="font-bold text-lg leading-5 text-dark-slate-blue mb-3">Wrist Size</div>
+                <div id="size-options" class="flex flex-col xs:flex-row justify-start items-center gap-3">
+                </div>
+            </div>
+
+            <!-- Quantity -->
+           <div class="pt-4 md:pt-5 flex flex-col xs:flex-row justify-start gap-4 items-center">
+            <div id="quantity-field" class="w-full xs:w-[130px] h-[36px] flex border border-soft-gray rounded-[4px] font-roboto text-[14px] font-normal leading-23 text-dark-slate-blue">
+                <div id="decrease" class="w-1/4 xs:w-[35px] flex items-center justify-center border-r border-soft-gray cursor-pointer">
+                    <img src="./src/assets/minus.png" alt="decress-icon">
+                </div>
+                <div id="quantity-display" class="w-2/4 xs:w-[60px] flex items-center justify-center border-r border-soft-gray font-normal text-[14px] leading-23 text-dark-slate-blue">
+                    0
+                </div>
+                <div id="increase" class="w-1/4 xs:w-[35px] flex items-center justify-center cursor-pointer">
+                    <img src="./src/assets/plus.png" alt="incress-icon">
+                </div>
+            </div>
+
+            <!-- Add to Cart and Wishlist -->
+            <div class="flex flex-col xs:flex-row justify-start gap-4 items-center pt-5 xs:pt-0">
+                <div class="flex flex-row justify-start items-center gap-4">
+                    <button id="add-to-cart" class="w-[110px] h-[36px] px-4 py-2 bg-[#6576FF] rounded-[3px] text-white text-[13px] font-bold leading-5 tracking-02 text-center focus:outline-none">
+                        Add to Cart
+                    </button>
+
+                    <a href="" id="wishlist"><img src="./src/assets/heart.svg" alt="heart-image" class="w-5 h-5 cursor-pointer"></a>
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+
+    <!-- Checkout Button -->
+    <div class="sticky-footer max-w-full mx-auto lg:max-w-[1330px] w-full flex justify-center">
+        <button id="checkout-button" class="custom-button mt-4 md:m-0">
+            <span class="checkout-text text-dark-slate-blue font-bold text-sm leading-[20px] tracking-02">Checkout</span>
+            <span id="cart-count" class="cart-badge flex items-center justify-center w-[19px] h-[20px] px-1.5 py-0.5 rounded-[5px] bg-white text-dark-slate-blue font-bold text-xs leading-[16px] tracking-02">0</span>
+        </button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="checkout-modal" class="hidden fixed inset-0 bg-[#11121B8C] z-50 items-center justify-center">
+        <!-- Modal Content -->
+        <div class="checkout-modal max-w-[650px] w-full p-5 md:p-11 bg-white rounded-[20px]">
+            <div class="font-bold text-[22px] leading-[24px] text-dark-slate-blue mb-3">Your Cart</div>
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="border-b border-soft-gray pb-3">
+                        <th class="table-head text-left w-[52%]">Item</th>
+                        <th class="table-head text-center w-[12%]">Color</th>
+                        <th class="table-head text-center w-[12%]">Size</th>
+                        <th class="table-head text-center w-[12%]">Qty</th>
+                        <th class="table-head text-right w-[12%]">Price</th>
+                    </tr>
+                </thead>
+                <!-- Product List -->
+                <tbody id="cart-items">
+                    <!-- Cart items dynamically inserted here -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="font-bold text-[14px] sm:text-[16px] text-[#373737] pt-6">Total</td>
+                        <td></td>
+                        <td></td>
+                        <td class="font-bold text-center text-[12px] sm:text-[14px] text-dark-slate-blue pt-6" id="total-qty">0</td>
+                        <td class="font-bold text-right text-[14px] sm:text-[18px] text-dark-slate-blue pt-6" id="total-price">$0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!-- Bottom Buttons -->
+            <div class="flex justify-end gap-6 items-center pt-10">
+                <button onclick="hideCheckout()" class="bg-white border border-soft-gray rounded-[3px] py-2 px-[18px] font-bold text-[13px] text-dark-slate-blue">Continue Shopping</button>
+                <button class="bg-[#6576FF] rounded-[3px] py-2 px-[18px] font-bold text-[13px] text-white">Checkout</button>
+            </div>
+        </div>
+    </div>
+  <!-- Toastify JS -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./src/app.js"></script>
+</body>
+</html>

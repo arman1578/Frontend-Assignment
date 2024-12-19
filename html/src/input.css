@@ -1,0 +1,96 @@
+/* Importing Font Roboto */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply flex flex-col justify-between items-center min-h-screen p-5 font-roboto;
+  }
+}
+
+@layer components {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  /* Custom Button */
+  .custom-button {
+    @apply flex items-center justify-center gap-2 w-[139px] px-6 py-2 rounded-2xl bg-[#FFBB5A] shadow-md;
+  }
+
+  /* Text Style */
+  .type-text {
+    @apply text-sm text-[#8091A7] leading-[23px];
+  }
+
+  /* Image Gallery */
+  .image-gallery img {
+    @apply hidden;
+  }
+  .image-gallery img.active-image {
+    @apply block;
+  }
+
+  /* Color Circle */
+  .color-circle {
+    @apply w-6 h-6 rounded-full cursor-pointer;
+  }
+
+  /* Size Option */
+  .size-option {
+    @apply px-4 py-2 border border-[#DBDFEA] rounded-md cursor-pointer flex justify-center items-center gap-1;
+  }
+
+  .size-option.active-size {
+    @apply border-[#6576FF];
+  }
+
+  .size-name, .size-price {
+    @apply text-[14px] text-[#364A63];
+  }
+
+  .size-option.active-size .size-name {
+    @apply text-[#6576FF];
+  }
+
+  /* Cart Table */
+  .table-head {
+    @apply text-[14px] text-[#8091A7] py-2;
+  }
+
+  .column-text, .column-title {
+    @apply text-center text-[#364A63] py-4 text-sm;
+  }
+
+  .column-title {
+    @apply text-[14px] font-normal leading-5;
+  }
+}
+
+@layer utilities {
+  /* Custom Colors */
+  .text-blue-gray {
+    color: #8091A7;
+  }
+  .text-blue-shade {
+    color: #6576FF;
+  }
+  .text-dark-slate-blue {
+    color: #364A63;
+  }
+
+  .border-soft-gray {
+    border-color: #DBDFEA;
+  }
+
+  .tracking-02 {
+    letter-spacing: 0.26px;
+  }
+
+  .leading-23 {
+    line-height: 23.1px;
+  }
+}
